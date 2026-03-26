@@ -220,6 +220,8 @@ html, body {
   transition: all 0.2s; flex: 1;
 }
 .tab-icon { font-size: 22px; line-height: 1; }
+.tab-item:first-child .tab-icon { font-size: 18px; } /* 今日图标变小 */
+.tab-item:nth-child(4) .tab-icon { font-size: 26px; } /* 呼吸图标变大 */
 .tab-label { font-size: 10px; color: var(--sub); white-space: nowrap; }
 .tab-item.active .tab-label { color: var(--primary); font-weight: 600; }
 
@@ -596,7 +598,7 @@ html, body {
           </div>
         </div>
       </div>
-      <div style="padding: 6px 16px; display: flex; gap: 8px;">
+      <div style="padding: 6px 16px 6px; display: flex; gap: 8px;">
         <div style="flex: 1; background: var(--white); border-radius: 10px; padding: 12px 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); cursor: pointer;" onclick="switchTab(2)">
           <div style="font-size: 12px; color: var(--text); font-weight: 500; margin-bottom: 2px;">🌸 打卡</div>
           <div style="font-size: 10px; color: var(--sub);">记录今日心情</div>
@@ -604,16 +606,6 @@ html, body {
         <div style="flex: 1; background: var(--white); border-radius: 10px; padding: 12px 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); cursor: pointer;" onclick="switchTab(3)">
           <div style="font-size: 12px; color: var(--text); font-weight: 500; margin-bottom: 2px;">🌱 花园</div>
           <div style="font-size: 10px; color: var(--sub);">连续12天打卡</div>
-        </div>
-      </div>
-      <div style="padding: 0 16px 6px; display: flex; gap: 8px;">
-        <div style="flex: 1; background: var(--white); border-radius: 10px; padding: 12px 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); cursor: pointer;" onclick="switchTab(1)">
-          <div style="font-size: 12px; color: var(--text); font-weight: 500; margin-bottom: 2px;">🎁 盲盒</div>
-          <div style="font-size: 10px; color: var(--sub);">来自陌生人的温暖</div>
-        </div>
-        <div style="flex: 1; background: var(--white); border-radius: 10px; padding: 12px 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); cursor: pointer;" onclick="switchTab(5)">
-          <div style="font-size: 12px; color: var(--text); font-weight: 500; margin-bottom: 2px;">🧘 呼吸</div>
-          <div style="font-size: 10px; color: var(--sub);">正念减压练习</div>
         </div>
       </div>
     </div>
