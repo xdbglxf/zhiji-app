@@ -40,20 +40,8 @@ html, body {
   overflow: hidden; /* 防止整个页面滚动 */
 }
 
-/* 状态栏（模拟） */
-.status-bar {
-  height: 36px; /* 缩小状态栏 */
-  background: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  font-size: 12px;
-  font-weight: 600;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 10;
-}
+/* 状态栏（模拟） - 已移除 */
+/*.status-bar { display: none; }*/
 
 /* 音乐播放器 */
 .music-player {
@@ -471,12 +459,6 @@ html, body {
 <body>
 <div id="app">
 
-  <!-- 状态栏 -->
-  <div class="status-bar">
-    <span id="statusTime">9:41</span>
-    <span>●●● ▂▄▆ 🔋</span>
-  </div>
-
   <!-- 音乐播放器 -->
   <div class="music-player">
     <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
@@ -863,9 +845,9 @@ html, body {
         <div class="more-item-icon" style="background:linear-gradient(135deg,#F0E8D8,#E0D0B8);">✉️</div>
         <div class="more-item-label">时光信箱</div>
       </div>
-      <div class="more-item" id="more-breath" onclick="goFromMore(7)">
-        <div class="more-item-icon" style="background:linear-gradient(135deg,#D8E8E0,#B8D8D0);">🧘</div>
-        <div class="more-item-label">呼吸练习</div>
+      <div class="more-item" id="more-calendar" onclick="goFromMore(3)">
+        <div class="more-item-icon" style="background:linear-gradient(135deg,#E0E8F0,#C0D8F0);">📅</div>
+        <div class="more-item-label">心情日历</div>
       </div>
     </div>
   </div>
@@ -875,7 +857,7 @@ html, body {
     <div class="tab-item active" onclick="switchTab(0)"><span class="tab-icon">🏠</span><span class="tab-label">今日</span></div>
     <div class="tab-item" onclick="switchTab(1)"><span class="tab-icon">🎁</span><span class="tab-label">惊喜盒</span></div>
     <div class="tab-item" onclick="switchTab(2)"><span class="tab-icon">💭</span><span class="tab-label">心情</span></div>
-    <div class="tab-item" onclick="switchTab(3)"><span class="tab-icon">📅</span><span class="tab-label">日历</span></div>
+    <div class="tab-item" onclick="switchTab(5)"><span class="tab-icon">🧘</span><span class="tab-label">呼吸</span></div>
     <div class="tab-item" onclick="switchTab(4)"><span class="tab-icon">👤</span><span class="tab-label">我的</span></div>
     <div class="tab-item" onclick="toggleMorePanel()" id="moreTabBtn"><span class="tab-icon">···</span><span class="tab-label">更多</span></div>
   </div>
@@ -883,16 +865,6 @@ html, body {
 </div><!-- end app -->
 
 <script>
-// ===== 实时时钟 =====
-function updateClock() {
-  const now = new Date();
-  const h = now.getHours().toString().padStart(2,'0');
-  const m = now.getMinutes().toString().padStart(2,'0');
-  document.getElementById('statusTime').textContent = h + ':' + m;
-}
-updateClock();
-setInterval(updateClock, 30000);
-
 // ===== Tab切换 =====
 const pages = ['home','box','checkin','calendar','profile','garden','mail','breath'];
 const coreTabCount = 5;
@@ -910,9 +882,9 @@ function switchTab(index) {
 }
 
 function updateMorePanelHighlight() {
-  ['more-garden','more-mail','more-breath'].forEach((id,i) => {
+  ['more-garden','more-mail','more-calendar'].forEach((id,i) => {
     const el = document.getElementById(id);
-    if (el) el.classList.toggle('current', currentTab === coreTabCount + i);
+    if (el) el.classList.toggle('current', currentTab === 5 + i);
   });
 }
 
