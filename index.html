@@ -37,16 +37,17 @@ html, body {
   position: relative;
   background: var(--bg);
   box-shadow: 0 0 60px rgba(0,0,0,0.15);
+  overflow: hidden; /* 防止整个页面滚动 */
 }
 
 /* 状态栏（模拟） */
 .status-bar {
-  height: 44px;
+  height: 36px; /* 缩小状态栏 */
   background: var(--bg);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 0 20px;
   font-size: 12px;
   font-weight: 600;
   flex-shrink: 0;
@@ -146,12 +147,15 @@ html, body {
 
 /* ===== 底部Tab ===== */
 .tab-bar {
-  height: 56px;
+  height: 52px; /* 缩小底部Tab高度 */
   background: var(--white);
   display: flex;
   align-items: center;
   justify-content: space-around;
   border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  z-index: 100;
+}
   flex-shrink: 0;
   position: relative;
   z-index: 100;
@@ -512,46 +516,50 @@ html, body {
   <!-- 页面内容区 -->
   <div class="page-container" id="pageContainer">
 
-    <!-- ===== 首页 ===== -->
+    <!-- ===== 首页（精简版 一屏展示） ===== -->
     <div class="page active" id="page-home">
-      <div class="home-header">
-        <div class="home-date" id="homeDate">2026年3月26日 星期四</div>
-        <div class="home-title">今日夸奖</div>
-        <div class="home-subtitle">专属于你的一句话</div>
+      <div class="home-header" style="padding: 12px 20px 8px;">
+        <div class="home-date" id="homeDate" style="font-size: 13px;">2026年3月26日 星期四</div>
       </div>
-      <div class="praise-card" id="praiseCard">
+      <div class="praise-card" id="praiseCard" style="margin: 8px 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.08);">
         <div class="praise-bg" style="background: linear-gradient(160deg, #C9DFC9 0%, #A8C5A0 40%, #7DA87D 100%)"></div>
         <div class="praise-mask"></div>
-        <div class="praise-content">
-          <span class="praise-tag">山水</span>
-          <div class="praise-text">万物从不说话，但山河懂你的来处。若世间喧嚣，我们就去草木深处，做一截不为人知的春芽。</div>
-          <span class="praise-date" id="praiseDate">2026.03.26</span>
+        <div class="praise-content" style="padding: 20px 18px;">
+          <span class="praise-tag" style="padding: 3px 10px; font-size: 10px; margin-bottom: 10px;">山水</span>
+          <div class="praise-text" style="font-size: 15px; line-height: 1.7; max-height: 3.4em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">万物从不说话，但山河懂你的来处。若世间喧嚣，我们就去草木深处，做一截不为人知的春芽。</div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+            <span class="praise-date" id="praiseDate" style="font-size: 11px; color: rgba(255,255,255,0.8);">2026.03.26</span>
+            <div style="display: flex; gap: 16px;">
+              <button class="action-btn-mini" id="likeBtn" onclick="toggleLike()" style="background: none; border: none; color: #fff; font-size: 11px; display: flex; align-items: center; gap: 4px; cursor: pointer; padding: 0;">
+                <span class="icon" id="likeIcon">🤍</span>
+                <span id="likeCount">128</span>
+              </button>
+              <button class="action-btn-mini" onclick="sharePraise()" style="background: none; border: none; color: #fff; font-size: 11px; cursor: pointer; padding: 0;">📤 分享</button>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="action-bar">
-        <button class="action-btn" id="likeBtn" onclick="toggleLike()">
-          <span class="icon" id="likeIcon">🤍</span>
-          <span class="label" id="likeCount">128</span>
-        </button>
-        <button class="action-btn" onclick="collectPraise(this)">
-          <span class="icon">☆</span>
-          <span class="label">收藏</span>
-        </button>
-        <button class="action-btn" onclick="sharePraise()">
-          <span class="icon">📤</span>
-          <span class="label">分享</span>
-        </button>
-      </div>
-      <div class="checkin-guide" onclick="switchTab(2)">今天心情如何？去打个卡 →</div>
-      <div style="padding: 0 20px;">
-        <div style="font-size: 14px; color: var(--text); font-weight: bold; margin: 20px 0 10px;">昨日回顾</div>
-        <div style="background: var(--white); border-radius: 14px; padding: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-          <span style="font-size: 11px; color: var(--primary); background: rgba(196,92,62,0.1); padding: 2px 10px; border-radius: 10px;">治愈</span>
-          <p style="font-size: 14px; color: #555; line-height: 1.8; margin-top: 10px; font-family: 'STKaiti','KaiTi',serif;">世间千万种人，你恰好是这一种——温柔、认真、有点敏感，又有着不输任何人的力量。</p>
-          <span style="font-size: 11px; color: #aaa;">2026.03.25 · ❤️ 96</span>
+      <div style="padding: 12px 16px; display: flex; gap: 10px;">
+        <div style="flex: 1; background: var(--white); border-radius: 12px; padding: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); cursor: pointer;" onclick="switchTab(2)">
+          <div style="font-size: 13px; color: var(--text); font-weight: 500; margin-bottom: 4px;">🌸 打卡</div>
+          <div style="font-size: 11px; color: var(--sub);">记录今日心情</div>
+        </div>
+        <div style="flex: 1; background: var(--white); border-radius: 12px; padding: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); cursor: pointer;" onclick="switchTab(3)">
+          <div style="font-size: 13px; color: var(--text); font-weight: 500; margin-bottom: 4px;">🌱 花园</div>
+          <div style="font-size: 11px; color: var(--sub);">连续12天打卡</div>
         </div>
       </div>
-      <div style="height: 20px;"></div>
+      <div style="padding: 12px 16px; display: flex; gap: 10px;">
+        <div style="flex: 1; background: var(--white); border-radius: 12px; padding: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); cursor: pointer;" onclick="switchTab(1)">
+          <div style="font-size: 13px; color: var(--text); font-weight: 500; margin-bottom: 4px;">🎁 盲盒</div>
+          <div style="font-size: 11px; color: var(--sub);">来自陌生人的温暖</div>
+        </div>
+        <div style="flex: 1; background: var(--white); border-radius: 12px; padding: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); cursor: pointer;" onclick="switchTab(5)">
+          <div style="font-size: 13px; color: var(--text); font-weight: 500; margin-bottom: 4px;">🧘 呼吸</div>
+          <div style="font-size: 11px; color: var(--sub);">正念减压练习</div>
+        </div>
+      </div>
+      <div style="height: 12px;"></div>
     </div>
 
     <!-- ===== 盲盒页 ===== -->
@@ -1074,7 +1082,13 @@ const rhythms = [
   [2,0.5,1,1.5,1,1,0.5,2,1,0.5,1.5,1,1,1.5,1,2,1.5,1,1,1.5,1,0.5,2,1,1.5,1,0.5,2,1,1.5],
 ];
 function initAudio() {
-  if (audioCtx) return;
+  if (audioCtx) {
+    // 如果已经初始化，确保处于运行状态
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    return;
+  }
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   masterGain = audioCtx.createGain();
   masterGain.gain.value = 0.15;
@@ -1106,11 +1120,36 @@ function playMelody() {
 }
 function toggleMusic() {
   initAudio();
-  if (audioCtx.state==='suspended') audioCtx.resume();
+  // 强制恢复 AudioContext 状态
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume().then(() => {
+      console.log('AudioContext resumed');
+    }).catch(err => {
+      console.error('Failed to resume AudioContext:', err);
+    });
+  }
   isPlaying = !isPlaying;
   const btn = document.getElementById('musicBtn');
-  if (isPlaying) { btn.classList.add('playing'); document.getElementById('volumeIcon').textContent='🔊'; playMelody(); }
-  else { btn.classList.remove('playing'); document.getElementById('volumeIcon').textContent='🔈'; clearTimeout(melodyLoop); }
+  if (isPlaying) {
+    btn.classList.add('playing');
+    document.getElementById('volumeIcon').textContent='🔊';
+    // 延迟播放，确保 AudioContext 完全激活
+    setTimeout(() => {
+      if (audioCtx.state === 'running') {
+        playMelody();
+      } else {
+        console.warn('AudioContext not running, state:', audioCtx.state);
+        // 如果还没激活，再试一次
+        audioCtx.resume().then(() => {
+          if (isPlaying) playMelody();
+        });
+      }
+    }, 100);
+  } else {
+    btn.classList.remove('playing');
+    document.getElementById('volumeIcon').textContent='🔈';
+    clearTimeout(melodyLoop);
+  }
 }
 function switchTrack(el, trackIdx) {
   currentTrackIdx = trackIdx;
