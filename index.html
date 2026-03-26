@@ -207,9 +207,6 @@ html, body {
   justify-content: space-around;
   border-top: 1px solid var(--border);
   flex-shrink: 0;
-  z-index: 100;
-}
-  flex-shrink: 0;
   position: relative;
   z-index: 100;
   padding: 0 8px;
@@ -267,9 +264,45 @@ html, body {
 .home-subtitle { font-size: 13px; color: var(--sub); }
 
 .praise-card {
-  margin: 8px 20px; border-radius: 20px; overflow: hidden; height: 400px;
+  margin: 8px 20px; border-radius: 20px; overflow: hidden; height: 320px;
   position: relative; box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   animation: slideUp 0.6s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+.paise-ink-decoration {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.ink-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.05);
+  animation: inkFloat 6s ease-in-out infinite;
+}
+.ink-circle:nth-child(1) {
+  width: 80px; height: 80px;
+  top: 15%; left: 10%;
+  animation-delay: 0s;
+}
+.ink-circle:nth-child(2) {
+  width: 50px; height: 50px;
+  top: 60%; right: 15%;
+  animation-delay: 2s;
+}
+.ink-circle:nth-child(3) {
+  width: 30px; height: 30px;
+  bottom: 25%; left: 20%;
+  animation-delay: 4s;
+}
+@keyframes inkFloat {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
+  50% { transform: translateY(-10px) scale(1.05); opacity: 0.6; }
 }
 @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 .praise-bg { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
@@ -301,37 +334,36 @@ html, body {
 }
 
 /* ===== 盲盒页 ===== */
-.box-header { padding: 12px 20px 8px; text-align: center; }
-.box-title { font-size: 26px; font-weight: bold; font-family: 'STKaiti','KaiTi',serif; }
-.box-subtitle { font-size: 11px; color: var(--sub); margin-top: 2px; }
-.box-tabs { display: flex; gap: 8px; padding: 8px 16px; overflow-x: auto; }
+.box-header { padding: 8px 16px 4px; text-align: center; }
+.box-title { font-size: 22px; font-weight: bold; font-family: 'STKaiti','KaiTi',serif; }
+.box-subtitle { font-size: 10px; color: var(--sub); margin-top: 2px; }
+.box-tabs { display: flex; gap: 6px; padding: 4px 12px; overflow-x: auto; }
 .box-tabs::-webkit-scrollbar { display: none; }
-.box-tab { padding: 5px 14px; background: var(--white); border-radius: 18px; font-size: 12px; color: var(--sub); border: 1px solid #E0E0E0; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.2s; }
+.box-tab { padding: 4px 12px; background: var(--white); border-radius: 14px; font-size: 11px; color: var(--sub); border: 1px solid #E0E0E0; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.2s; }
 .box-tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
-.box-list { padding: 0 16px 8px; display: flex; flex-direction: column; gap: 10px; }
+.box-list { padding: 0 12px 60px; display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }
 .box-card {
-  background: var(--white); border-radius: 14px; overflow: hidden;
+  background: var(--white); border-radius: 12px; overflow: hidden;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer;
   transition: transform 0.2s; animation: fadeIn 0.4s ease-out;
 }
 .box-card:hover { transform: scale(1.01); }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-.box-cover { height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.box-emoji { font-size: 36px; margin-bottom: 6px; }
-.box-name { font-size: 14px; color: var(--text); font-weight: bold; font-family: 'STKaiti','KaiTi',serif; }
-.box-info { padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
-.box-author { font-size: 12px; color: var(--text); font-weight: 500; }
-.box-time { font-size: 10px; color: #aaa; }
-.box-stats { display: flex; gap: 10px; font-size: 11px; color: var(--sub); }
+.box-cover { height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.box-emoji { font-size: 28px; margin-bottom: 4px; }
+.box-name { font-size: 12px; color: var(--text); font-weight: bold; font-family: 'STKaiti','KaiTi',serif; }
+.box-info { padding: 6px 10px; display: flex; justify-content: space-between; align-items: center; }
+.box-author { font-size: 10px; color: var(--text); font-weight: 500; }
+.box-time { font-size: 9px; color: #aaa; }
+.box-stats { display: flex; gap: 8px; font-size: 9px; color: var(--sub); }
 
 .create-float {
-  position: sticky; bottom: 8px; float: right;
-  margin-right: 16px; margin-top: 4px;
+  position: fixed; bottom: 70px; right: 16px;
   background: var(--primary); color: #fff;
-  padding: 10px 18px; border-radius: 24px;
+  padding: 8px 16px; border-radius: 24px;
   display: flex; align-items: center; gap: 4px;
   cursor: pointer; box-shadow: 0 4px 12px rgba(196,92,62,0.3);
-  font-size: 13px; font-weight: 500; z-index: 10;
+  font-size: 12px; font-weight: 500; z-index: 95;
 }
 
 /* 开箱弹窗 */
@@ -507,6 +539,194 @@ html, body {
   pointer-events: none; transition: opacity 0.3s;
 }
 
+/* ===== 分享面板 ===== */
+.share-panel {
+  width: min(300px, calc(100vw - 32px));
+  background: var(--white);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  animation: slideUp 0.3s ease-out;
+}
+.share-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--text);
+  margin-bottom: 16px;
+  font-family: 'STKaiti','KaiTi',serif;
+}
+.share-options {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.share-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.share-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #fff;
+  transition: transform 0.2s;
+}
+.share-option:hover .share-icon {
+  transform: scale(1.1);
+}
+.share-label {
+  font-size: 11px;
+  color: var(--text);
+}
+.share-close {
+  padding: 8px 24px;
+  background: var(--bg);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* ===== 月度总结面板 ===== */
+.summary-panel {
+  width: min(320px, calc(100vw - 32px));
+  background: var(--white);
+  border-radius: 24px;
+  padding: 18px 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  animation: slideUp 0.3s ease-out;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+.summary-panel::-webkit-scrollbar { display: none; }
+.summary-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.summary-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--sub);
+  cursor: pointer;
+}
+.summary-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--text);
+  font-family: 'STKaiti','KaiTi',serif;
+  margin-bottom: 6px;
+}
+.summary-subtitle {
+  font-size: 12px;
+  color: var(--sub);
+}
+.summary-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 12px;
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 10px 0;
+}
+.summary-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.s-num {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary);
+}
+.s-label {
+  font-size: 10px;
+  color: var(--sub);
+}
+.summary-mood {
+  margin-bottom: 12px;
+}
+.summary-mood-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.summary-mood-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.s-mood-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.s-bar-label {
+  font-size: 11px;
+  width: 45px;
+  color: var(--text);
+}
+.s-bar-track {
+  flex: 1;
+  height: 6px;
+  background: #E0E0E0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.s-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+.s-bar-val {
+  font-size: 10px;
+  color: var(--sub);
+  width: 28px;
+  text-align: right;
+}
+.summary-quote {
+  text-align: center;
+  background: linear-gradient(135deg, #F5F2E9, #E8E4D8);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+.summary-quote-text {
+  font-size: 12px;
+  color: var(--text);
+  font-family: 'STKaiti','KaiTi',serif;
+  line-height: 1.6;
+}
+.summary-share-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(135deg, var(--primary), #D47860);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
 /* ===== 响应式适配 ===== */
 @media (min-width: 481px) {
   body { background: #1a1a2e; }
@@ -562,8 +782,16 @@ html, body {
         <div class="track-info"><div class="track-name">山泉映月</div><div class="track-desc">古琴风 · 悠远</div></div>
       </div>
       <div class="track-item" onclick="switchTrack(this,2)">
-        <span class="track-icon">🍂</span>
-        <div class="track-info"><div class="track-name">秋叶知禅</div><div class="track-desc">冥想 · 宁静</div></div>
+        <span class="track-icon">🌙</span>
+        <div class="track-info"><div class="track-name">夜雨听荷</div><div class="track-desc">宁静 · 治愈</div></div>
+      </div>
+      <div class="track-item" onclick="switchTrack(this,3)">
+        <span class="track-icon">🍃</span>
+        <div class="track-info"><div class="track-name">春江花月</div><div class="track-desc">唯美 · 柔美</div></div>
+      </div>
+      <div class="track-item" onclick="switchTrack(this,4)">
+        <span class="track-icon">🌸</span>
+        <div class="track-info"><div class="track-name">樱花落处</div><div class="track-desc">温暖 · 舒心</div></div>
       </div>
       <div class="volume-row">
         <span id="volumeIcon">🔈</span>
@@ -580,30 +808,45 @@ html, body {
       <div class="home-header" style="padding: 8px 20px 4px;">
         <div class="home-date" id="homeDate" style="font-size: 12px;">2026年3月26日 星期四</div>
       </div>
-      <div class="praise-card" id="praiseCard" style="margin: 4px 16px 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
-        <div class="praise-bg" style="background: linear-gradient(160deg, #C9DFC9 0%, #A8C5A0 40%, #7DA87D 100%)"></div>
+      <div class="praise-card" id="praiseCard" style="margin: 4px 16px 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor:pointer;" onclick="nextPraise()">
+        <div class="praise-bg"></div>
         <div class="praise-mask"></div>
-        <div class="praise-content" style="padding: 16px 14px;">
-          <span class="praise-tag" style="padding: 2px 8px; font-size: 10px; margin-bottom: 6px;">山水</span>
-          <div class="praise-text" style="font-size: 14px; line-height: 1.6; max-height: 3.2em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">万物从不说话，但山河懂你的来处。若世间喧嚣，我们就去草木深处，做一截不为人知的春芽。</div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-            <span class="praise-date" id="praiseDate" style="font-size: 10px; color: rgba(255,255,255,0.8);">2026.03.26</span>
-            <div style="display: flex; gap: 12px;">
-              <button class="action-btn-mini" id="likeBtn" onclick="toggleLike()" style="background: none; border: none; color: #fff; font-size: 10px; display: flex; align-items: center; gap: 3px; cursor: pointer; padding: 0;">
-                <span class="icon" id="likeIcon">🤍</span>
+        <div class="paise-ink-decoration">
+          <div class="ink-circle"></div>
+          <div class="ink-circle"></div>
+          <div class="ink-circle"></div>
+        </div>
+        <div style="position: absolute; top: 12px; left: 12px; opacity: 0.6; font-size: 18px;">🌸</div>
+        <div style="position: absolute; bottom: 12px; right: 12px; opacity: 0.5; font-size: 16px;">🎋</div>
+        <div class="praise-content" style="padding: 24px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; height: 100%; justify-content: center;">
+          <span class="praise-tag" style="padding: 5px 14px; font-size: 12px; margin-bottom: 20px;">山水</span>
+          <div class="praise-text" style="font-size: 20px; line-height: 2; font-weight: 500; max-height: none; overflow: visible; text-overflow: clip; display: block; padding: 0 10px;"></div>
+          <div style="display: flex; justify-content: flex-end; align-items: center; margin-top: auto; padding-top: 20px; width: 100%;">
+            <div style="display: flex; gap: 20px;">
+              <button class="action-btn-mini" id="likeBtn" onclick="event.stopPropagation();toggleLike()" style="background: none; border: none; color: #fff; font-size: 14px; display: flex; align-items: center; gap: 6px; cursor: pointer; padding: 0;">
+                <span class="icon" id="likeIcon" style="font-size: 16px;">🤍</span>
                 <span id="likeCount">128</span>
               </button>
-              <button class="action-btn-mini" onclick="sharePraise()" style="background: none; border: none; color: #fff; font-size: 10px; cursor: pointer; padding: 0;">📤 分享</button>
+              <button class="action-btn-mini" onclick="event.stopPropagation();sharePraise()" style="background: none; border: none; color: #fff; font-size: 14px; cursor: pointer; padding: 0;">📤 分享</button>
             </div>
           </div>
+          <div style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); font-size: 10px; color: rgba(255,255,255,0.6); white-space: nowrap;">✨ 点击切换下一句</div>
         </div>
       </div>
-      <div style="padding: 6px 16px 6px; display: flex; gap: 8px;">
-        <div style="flex: 1; background: var(--white); border-radius: 10px; padding: 12px 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); cursor: pointer;" onclick="switchTab(2)">
+      <div style="padding: 6px 16px 6px; display: grid; grid-template-columns: repeat(2,1fr); gap: 8px;">
+        <div style="background: var(--white); border-radius: 10px; padding: 12px 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); cursor: pointer;" onclick="switchTab(2)">
           <div style="font-size: 12px; color: var(--text); font-weight: 500; margin-bottom: 2px;">🌸 打卡</div>
           <div style="font-size: 10px; color: var(--sub);">记录今日心情</div>
         </div>
-        <div style="flex: 1; background: var(--white); border-radius: 10px; padding: 12px 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); cursor: pointer;" onclick="switchTab(3)">
+        <div style="background: var(--white); border-radius: 10px; padding: 12px 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); cursor: pointer;" onclick="switchTab(5)">
+          <div style="font-size: 12px; color: var(--text); font-weight: 500; margin-bottom: 2px;">🧘 呼吸</div>
+          <div style="font-size: 10px; color: var(--sub);">30秒平静</div>
+        </div>
+        <div style="background: var(--white); border-radius: 10px; padding: 12px 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); cursor: pointer;" onclick="switchTab(1)">
+          <div style="font-size: 12px; color: var(--text); font-weight: 500; margin-bottom: 2px;">🎁 惊喜盒</div>
+          <div style="font-size: 10px; color: var(--sub);">领取温暖心意</div>
+        </div>
+        <div style="background: var(--white); border-radius: 10px; padding: 12px 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); cursor: pointer;" onclick="switchTab(5)">
           <div style="font-size: 12px; color: var(--text); font-weight: 500; margin-bottom: 2px;">🌱 花园</div>
           <div style="font-size: 10px; color: var(--sub);">连续12天打卡</div>
         </div>
@@ -733,6 +976,8 @@ html, body {
       </div>
       <div class="profile-section">
         <div class="section-title">设置</div>
+        <div class="setting-item" onclick="showMonthlySummary()"><span class="setting-label">📊 月度打卡总结</span><span class="setting-arrow">›</span></div>
+        <div class="divider"></div>
         <div class="setting-item"><span class="setting-label">每日提醒</span><div class="toggle-switch on" onclick="this.classList.toggle('on')"></div></div>
         <div class="divider"></div>
         <div class="setting-item"><span class="setting-label">背景音乐</span><div class="toggle-switch" onclick="this.classList.toggle('on')"></div></div>
@@ -922,9 +1167,7 @@ html, body {
   <!-- 底部Tab -->
   <div class="tab-bar">
     <div class="tab-item active" onclick="switchTab(0)"><span class="tab-icon">🏠</span><span class="tab-label">今日</span></div>
-    <div class="tab-item" onclick="switchTab(1)"><span class="tab-icon">🎁</span><span class="tab-label">惊喜盒</span></div>
     <div class="tab-item" onclick="switchTab(2)"><span class="tab-icon">💭</span><span class="tab-label">心情</span></div>
-    <div class="tab-item" onclick="switchTab(5)"><span class="tab-icon">🧘</span><span class="tab-label">呼吸</span></div>
     <div class="tab-item" onclick="switchTab(4)"><span class="tab-icon">👤</span><span class="tab-label">我的</span></div>
     <div class="tab-item" onclick="toggleMorePanel()" id="moreTabBtn"><span class="tab-icon">···</span><span class="tab-label">更多</span></div>
   </div>
@@ -981,21 +1224,78 @@ function closeMorePanel() {
 }
 function goFromMore(index) { closeMorePanel(); switchTab(index); }
 
+// ===== 首页夸奖文案库 =====
+const praiseLibrary = [
+  { text: '万物从不说话,但山河懂你的来处。若世间喧嚣,我们就去草木深处,做一截不为人知的春芽。', tag: '山水', bg: '#C9DFC9', likes: 128 },
+  { text: '你不必成为任何人眼中的完美。你原本的样子,就是最好的风景。', tag: '温暖', bg: '#F0D0C0', likes: 156 },
+  { text: '每一次深呼吸,都是在告诉这个世界:我还在,我很好。', tag: '治愈', bg: '#B5A8D4', likes: 142 },
+  { text: '今天的你,已经比昨天的你,更勇敢了一点点。', tag: '鼓励', bg: '#D4E8D4', likes: 178 },
+  { text: '那些你觉得撑不过去的夜晚,最终都变成了你成长的光。', tag: '成长', bg: '#E8D4A0', likes: 193 },
+  { text: '你不需要追赶任何人,按照自己的节奏,慢慢来就好。', tag: '温柔', bg: '#F5E6C8', likes: 167 },
+  { text: '允许自己疲惫,允许自己迷茫,这是你对自己的温柔。', tag: '自爱', bg: '#B8D4E8', likes: 134 },
+  { text: '春天会来,花会开,你也会遇见更好的自己。', tag: '希望', bg: '#C9DFC9', likes: 189 },
+  { text: '每一个坚持的日子,都是在为未来的自己积攒力量。', tag: '坚持', bg: '#D4C8E8', likes: 211 },
+  { text: '你值得被温柔以待,就像春风对待每一朵花。', tag: '美好', bg: '#F0E8D8', likes: 145 },
+];
+
+let currentPraiseIdx = 0;
+let currentBoxIdx = -1;
+
+// ===== 初始化随机夸奖 =====
+function initRandomPraise() {
+  currentPraiseIdx = Math.floor(Math.random() * praiseLibrary.length);
+  updatePraiseCard();
+}
+
+function updatePraiseCard() {
+  const praise = praiseLibrary[currentPraiseIdx];
+  document.getElementById('praiseCard').querySelector('.praise-bg').style.background = `linear-gradient(160deg, ${praise.bg} 0%, ${praise.bg}aa 100%)`;
+  document.querySelector('.praise-tag').textContent = praise.tag;
+  document.querySelector('.praise-text').textContent = praise.text;
+  document.getElementById('likeCount').textContent = praise.likes;
+}
+
 // ===== 首页点赞 =====
 let liked = false;
 function toggleLike() {
   liked = !liked;
   document.getElementById('likeIcon').textContent = liked ? '❤️' : '🤍';
-  document.getElementById('likeCount').textContent = liked ? '129' : '128';
+  document.getElementById('likeCount').textContent = liked ? parseInt(document.getElementById('likeCount').textContent) + 1 : parseInt(document.getElementById('likeCount').textContent) - 1;
   if (liked) document.getElementById('likeBtn').classList.add('liked');
   else document.getElementById('likeBtn').classList.remove('liked');
 }
+function nextPraise() {
+  currentPraiseIdx = (currentPraiseIdx + 1) % praiseLibrary.length;
+  updatePraiseCard();
+  liked = false;
+  document.getElementById('likeIcon').textContent = '🤍';
+}
+
 function collectPraise(btn) {
   const icon = btn.querySelector('.icon');
   icon.textContent = icon.textContent === '☆' ? '★' : '☆';
   showToast(icon.textContent === '★' ? '已收藏' : '已取消收藏');
 }
-function sharePraise() { showToast('截图分享，让温暖传递出去 📤'); }
+function sharePraise() { showShareModal(); }
+
+// ===== 盲盒打开后的点赞和分享 =====
+let currentBoxLiked = false;
+let currentBoxLikes = 0;
+
+function likeOpenedBox() {
+  currentBoxLiked = !currentBoxLiked;
+  const actionBtns = document.querySelectorAll('.result-action-btn');
+  if (actionBtns[0]) {
+    actionBtns[0].textContent = currentBoxLiked ? '❤️ 已点赞' : '🤍 点赞';
+  }
+  if (currentBoxIdx >= 0 && boxData[currentBoxIdx]) {
+    boxData[currentBoxIdx].likes += currentBoxLiked ? 1 : -1;
+    renderBoxList('all');
+  }
+  showToast(currentBoxLiked ? '已点赞' : '已取消点赞');
+}
+
+function shareOpenedBox() { showShareModal(); }
 
 // ===== 盲盒数据 =====
 const boxData = [
@@ -1009,7 +1309,8 @@ const boxData = [
 
 function renderBoxList(filter) {
   const list = filter==='all' ? boxData : boxData.filter(b=>b.category===filter);
-  document.getElementById('boxList').innerHTML = list.map(box => `
+  const displayList = list.slice(0, 6); // 只显示前6个,一屏显示
+  document.getElementById('boxList').innerHTML = displayList.map(box => `
     <div class="box-card" onclick="openBox(${boxData.indexOf(box)})">
       <div class="box-cover" style="background:linear-gradient(135deg,${box.color},${box.color}aa)">
         <span class="box-emoji">${box.emoji}</span>
@@ -1017,7 +1318,7 @@ function renderBoxList(filter) {
       </div>
       <div class="box-info">
         <div><div class="box-author">${box.author}</div><div class="box-time">${box.time}</div></div>
-        <div class="box-stats"><span>🤍 ${box.likes}</span><span>👁️ ${box.opens}</span></div>
+        <div class="box-stats"><span>🤍 ${box.likes}</span></div>
       </div>
     </div>
   `).join('');
@@ -1031,13 +1332,16 @@ function filterBox(el, category) {
 
 function openBox(index) {
   const box = boxData[index];
+  currentBoxIdx = index;
+  currentBoxLiked = false;
+  currentBoxLikes = box.likes;
   const overlay = document.getElementById('unboxOverlay');
   const content = document.getElementById('unboxContent');
   const catMap = { warm:'温暖', encourage:'鼓励', comfort:'安慰' };
   content.innerHTML = `<div class="shake-box" style="background:linear-gradient(135deg,${box.color},${box.color}aa)"><span class="shake-emoji">🎁</span><span class="shake-text">正在打开...</span></div><div class="close-unbox" onclick="closeBox()">关闭</div>`;
   overlay.classList.add('show');
   setTimeout(() => {
-    content.innerHTML = `<div class="result-card" style="background:linear-gradient(135deg,${box.color},${box.color}aa)"><span class="result-category">${catMap[box.category]}</span><span class="result-text">${box.content}</span><span class="result-from">—— 来自 ${box.author}</span></div><div class="result-actions"><div class="result-action-btn">🤍 点赞</div><div class="result-action-btn">📤 分享</div></div><div class="close-unbox" onclick="closeBox()">关闭</div>`;
+    content.innerHTML = `<div class="result-card" style="background:linear-gradient(135deg,${box.color},${box.color}aa)"><span class="result-category">${catMap[box.category]}</span><span class="result-text">${box.content}</span><span class="result-from">—— 来自 ${box.author}</span></div><div class="result-actions"><div class="result-action-btn" onclick="likeOpenedBox()">🤍 点赞</div><div class="result-action-btn" onclick="shareOpenedBox()">📤 分享</div></div><div class="close-unbox" onclick="closeBox()">关闭</div>`;
   }, 1200);
 }
 function closeBox() { document.getElementById('unboxOverlay').classList.remove('show'); }
@@ -1121,86 +1425,135 @@ const pentatonic = {
   0:[523.25,587.33,659.25,783.99,880.00,1046.50,1174.66,1318.51],
   1:[261.63,293.66,329.63,392.00,440.00,523.25,587.33,659.25],
   2:[220.00,246.94,277.18,329.63,369.99,440.00,493.88,554.37],
+  3:[293.66,329.63,392.00,440.00,523.25,587.33,659.25,783.99],
+  4:[392.00,440.00,523.25,587.33,659.25,783.99,880.00,1046.50],
 };
 const melodies = [
+  // 竹影清风 - 五声音阶轻柔
   [0,2,4,3,2,4,5,4,2,0,2,4,3,4,2,0,1,3,5,4,3,2,0,2,4,5,4,3,2,4,2,0],
+  // 山泉映月 - 古琴风悠远
   [0,1,2,4,3,2,0,1,2,4,5,4,2,0,1,2,3,4,5,4,3,2,0,1,2,3,4,2,0,1,0],
-  [0,2,4,3,2,0,1,2,0,2,4,5,4,3,2,0,0,1,2,4,3,2,0,2,4,3,2,0,1,0,2],
+  // 夜雨听荷 - 宁静治愈
+  [2,1,0,2,4,5,4,3,2,0,2,3,4,5,4,3,2,1,0,2,4,5,4,3,2,0,1,2,0],
+  // 春江花月 - 唯美柔美
+  [0,2,4,5,4,5,7,5,4,2,0,1,2,4,5,7,5,4,2,0,2,4,5,4,2,0,1,2,0],
+  // 樱花落处 - 温暖舒心
+  [4,3,4,5,7,5,4,3,2,0,2,4,5,4,3,4,5,7,5,4,3,2,0,2,4,5,4,3,2,1,0],
 ];
 const rhythms = [
+  // 竹影清风 - 轻柔节奏
   [1,0.5,1,0.5,0.5,1,1.5,0.5,1,0.5,0.5,1,1,0.5,0.5,1,1,0.5,1.5,0.5,1,0.5,1,0.5,0.5,1.5,0.5,1,0.5,1,1.5],
+  // 山泉映月 - 悠远节奏
   [1.5,0.5,1,1.5,0.5,1,1,0.5,1.5,1,1.5,0.5,1,0.5,1,1.5,1,1,1.5,0.5,1,0.5,1,1,0.5,1.5,1,0.5,1,1.5],
+  // 夜雨听荷 - 宁静节奏
   [2,0.5,1,1.5,1,1,0.5,2,1,0.5,1.5,1,1,1.5,1,2,1.5,1,1,1.5,1,0.5,2,1,1.5,1,0.5,2,1,1.5],
+  // 春江花月 - 唯美节奏
+  [1,0.5,0.5,1,1.5,1,0.5,1,0.5,1,1.5,1,0.5,1.5,0.5,1,1,0.5,0.5,1.5,1,0.5,1,0.5,0.5,1,1.5,1,0.5,1,1.5],
+  // 樱花落处 - 温暖节奏
+  [1,1,0.5,1,1.5,0.5,1,0.5,1.5,1,0.5,1,1.5,1,0.5,1,1,1.5,0.5,1,0.5,1,1,0.5,1.5,0.5,1,1,1.5,0.5],
 ];
 function initAudio() {
   if (audioCtx) {
-    // 如果已经初始化，确保处于运行状态
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
     return;
   }
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContext) {
+    console.error('AudioContext not supported');
+    return;
+  }
+  audioCtx = new AudioContext();
   masterGain = audioCtx.createGain();
-  masterGain.gain.value = 0.15;
+  masterGain.gain.value = 0.3; // 增大音量
   masterGain.connect(audioCtx.destination);
 }
 function playNote(freq, duration, track) {
+  if (!audioCtx) {
+    console.error('AudioContext not available');
+    return;
+  }
+
   const now = audioCtx.currentTime;
-  const osc1 = audioCtx.createOscillator(); osc1.type = 'sine'; osc1.frequency.setValueAtTime(freq, now);
-  const osc2 = audioCtx.createOscillator(); osc2.type = 'sine'; osc2.frequency.setValueAtTime(freq*2.01, now);
+  const osc1 = audioCtx.createOscillator();
+  osc1.type = 'sine';
+  osc1.frequency.setValueAtTime(freq, now);
+
+  const osc2 = audioCtx.createOscillator();
+  osc2.type = 'sine';
+  osc2.frequency.setValueAtTime(freq * 1.5, now); // 改为1.5倍频,更有和声感
+
   const env = audioCtx.createGain();
-  const attack = track===2?0.08:0.03, decay = track===2?0.3:0.15, sustain = track===2?0.15:0.25, release = track===2?0.6:0.4;
-  env.gain.setValueAtTime(0,now); env.gain.linearRampToValueAtTime(0.5,now+attack); env.gain.linearRampToValueAtTime(sustain,now+attack+decay); env.gain.setValueAtTime(sustain,now+duration-release); env.gain.linearRampToValueAtTime(0,now+duration);
-  const env2 = audioCtx.createGain();
-  env2.gain.setValueAtTime(0,now); env2.gain.linearRampToValueAtTime(0.15,now+attack); env2.gain.linearRampToValueAtTime(sustain*0.3,now+attack+decay); env2.gain.setValueAtTime(sustain*0.3,now+duration-release); env2.gain.linearRampToValueAtTime(0,now+duration);
-  osc1.connect(env); osc2.connect(env2); env2.connect(env); env.connect(masterGain);
-  osc1.start(now); osc1.stop(now+duration+0.05); osc2.start(now); osc2.stop(now+duration+0.05);
+  const attack = track===2 ? 0.08 : 0.03;
+  const decay = track===2 ? 0.3 : 0.15;
+  const sustain = track===2 ? 0.15 : 0.25;
+  const release = track===2 ? 0.6 : 0.4;
+
+  env.gain.setValueAtTime(0, now);
+  env.gain.linearRampToValueAtTime(0.6, now + attack); // 稍微增大音量
+  env.gain.linearRampToValueAtTime(sustain, now + attack + decay);
+  env.gain.setValueAtTime(sustain, now + duration - release);
+  env.gain.linearRampToValueAtTime(0, now + duration);
+
+  osc1.connect(env);
+  env.connect(masterGain);
+
+  osc1.start(now);
+  osc1.stop(now + duration + 0.1);
+
+  console.log('Playing note:', freq, 'duration:', duration);
 }
 function playMelody() {
-  if (!isPlaying) return;
-  const scale = pentatonic[currentTrackIdx], melody = melodies[currentTrackIdx], rhythm = rhythms[currentTrackIdx];
-  const baseBeat = currentTrackIdx===0?0.35:currentTrackIdx===1?0.45:0.55;
+  if (!isPlaying || !audioCtx) return;
+
+  const scale = pentatonic[currentTrackIdx];
+  const melody = melodies[currentTrackIdx];
+  const rhythm = rhythms[currentTrackIdx];
+
+  // 每首曲子不同的基准速度
+  const baseBeat = currentTrackIdx===0 ? 0.35 : currentTrackIdx===1 ? 0.45 : currentTrackIdx===2 ? 0.5 : currentTrackIdx===3 ? 0.4 : 0.38;
+
   let t = 0;
-  melody.forEach((noteIdx,i) => {
-    const dur = rhythm[i]*baseBeat;
-    setTimeout(() => { if (isPlaying) playNote(scale[noteIdx], dur*1.2, currentTrackIdx); }, t*1000);
+  melody.forEach((noteIdx, i) => {
+    const dur = rhythm[i] * baseBeat;
+    setTimeout(() => {
+      if (isPlaying && audioCtx.state === 'running') {
+        playNote(scale[noteIdx], dur * 1.2, currentTrackIdx);
+      }
+    }, t * 1000);
     t += dur;
   });
-  melodyLoop = setTimeout(() => { if (isPlaying) playMelody(); }, t*1000+500);
+
+  melodyLoop = setTimeout(() => {
+    if (isPlaying) playMelody();
+  }, t * 1000 + 500);
 }
 function toggleMusic() {
   initAudio();
-  // 强制恢复 AudioContext 状态
-  if (audioCtx.state === 'suspended') {
-    audioCtx.resume().then(() => {
-      console.log('AudioContext resumed');
-    }).catch(err => {
-      console.error('Failed to resume AudioContext:', err);
-    });
+  if (!audioCtx) {
+    console.error('AudioContext not initialized');
+    return;
   }
-  isPlaying = !isPlaying;
-  const btn = document.getElementById('musicBtn');
-  if (isPlaying) {
-    btn.classList.add('playing');
-    document.getElementById('volumeIcon').textContent='🔊';
-    // 延迟播放，确保 AudioContext 完全激活
-    setTimeout(() => {
-      if (audioCtx.state === 'running') {
-        playMelody();
-      } else {
-        console.warn('AudioContext not running, state:', audioCtx.state);
-        // 如果还没激活，再试一次
-        audioCtx.resume().then(() => {
-          if (isPlaying) playMelody();
-        });
-      }
-    }, 100);
-  } else {
-    btn.classList.remove('playing');
-    document.getElementById('volumeIcon').textContent='🔈';
-    clearTimeout(melodyLoop);
-  }
+
+  // 必须在用户交互后恢复
+  audioCtx.resume().then(() => {
+    console.log('AudioContext state:', audioCtx.state);
+
+    isPlaying = !isPlaying;
+    const btn = document.getElementById('musicBtn');
+
+    if (isPlaying) {
+      btn.classList.add('playing');
+      document.getElementById('volumeIcon').textContent = '🔊';
+      playMelody();
+      console.log('Music started');
+    } else {
+      btn.classList.remove('playing');
+      document.getElementById('volumeIcon').textContent = '🔈';
+      clearTimeout(melodyLoop);
+      console.log('Music stopped');
+    }
+  }).catch(err => {
+    console.error('Failed to resume AudioContext:', err);
+  });
 }
 function switchTrack(el, trackIdx) {
   currentTrackIdx = trackIdx;
@@ -1209,9 +1562,11 @@ function switchTrack(el, trackIdx) {
   if (isPlaying) { clearTimeout(melodyLoop); setTimeout(()=>playMelody(), 200); }
 }
 function changeVolume(val) {
-  if (!audioCtx) return;
-  masterGain.gain.setValueAtTime(val/100*0.5, audioCtx.currentTime);
+  if (!audioCtx || !masterGain) return;
+  const volume = val / 100 * 0.6; // 最大音量0.6
+  masterGain.gain.setValueAtTime(volume, audioCtx.currentTime);
   document.getElementById('volumeIcon').textContent = val==0?'🔈':val<50?'🔉':'🔊';
+  console.log('Volume set to:', volume);
 }
 document.addEventListener('click', e => {
   const player = document.querySelector('.music-player');
@@ -1295,6 +1650,70 @@ function finishBreath() {
   btn.onclick = () => { for(let i=0;i<4;i++) document.getElementById('bd'+i).className='bdot'; document.getElementById('breathFinish').style.display='none'; btn.onclick=toggleBreath; btn.textContent='开始练习'; btn.style.cssText='background:linear-gradient(135deg,#5C8D89,#7DAF9A);color:#fff;'; document.getElementById('breathText').textContent='准备开始'; startBreath(); };
 }
 
+// ===== 全局分享功能 =====
+function showShareModal() {
+  const overlay = document.getElementById('shareOverlay');
+  const content = document.getElementById('shareContent');
+  if (!overlay) {
+    const html = `
+    <div class="unbox-overlay" id="shareOverlay">
+      <div class="share-panel">
+        <div class="share-title">📤 分享给朋友</div>
+        <div class="share-options">
+          <div class="share-option" onclick="doShare('wechat')">
+            <div class="share-icon" style="background:#07C160;">💬</div>
+            <div class="share-label">微信好友</div>
+          </div>
+          <div class="share-option" onclick="doShare('moments')">
+            <div class="share-icon" style="background:#07C160;">📷</div>
+            <div class="share-label">朋友圈</div>
+          </div>
+          <div class="share-option" onclick="doShare('weibo')">
+            <div class="share-icon" style="background:#E6162D;">🔴</div>
+            <div class="share-label">微博</div>
+          </div>
+          <div class="share-option" onclick="doShare('copy')">
+            <div class="share-icon" style="background:#999;">📋</div>
+            <div class="share-label">复制链接</div>
+          </div>
+        </div>
+        <div class="share-close" onclick="closeShareModal()">关闭</div>
+      </div>
+    </div>`;
+    document.body.insertAdjacentHTML('beforeend', html);
+  }
+  document.getElementById('shareOverlay').classList.add('show');
+}
+
+function closeShareModal() {
+  const overlay = document.getElementById('shareOverlay');
+  if (overlay) overlay.classList.remove('show');
+}
+
+function doShare(platform) {
+  const shareUrl = 'https://xdbglxf.github.io/zhiji-app';
+  const shareText = '知己 - 情绪疗愈花园,每天两分钟,被这个世界温柔以待';
+  switch(platform) {
+    case 'wechat':
+      showToast('请使用微信分享功能');
+      break;
+    case 'moments':
+      showToast('请使用朋友圈分享功能');
+      break;
+    case 'weibo':
+      window.open(`https://service.weibo.com/share/share.php?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(shareText)}`, '_blank');
+      break;
+    case 'copy':
+      navigator.clipboard.writeText(`${shareText}\n${shareUrl}`).then(() => {
+        showToast('✅ 已复制链接');
+      }).catch(() => {
+        showToast('复制失败,请手动复制');
+      });
+      break;
+  }
+  closeShareModal();
+}
+
 // ===== 成长花园 =====
 let gardenWatered = false;
 function waterFlower() {
@@ -1312,7 +1731,90 @@ function waterFlower() {
   }, 1500);
 }
 
+// ===== 月度打卡总结 =====
+function showMonthlySummary() {
+  const overlay = document.getElementById('summaryOverlay');
+  const content = document.getElementById('summaryContent');
+  if (!overlay) {
+    const html = `
+    <div class="unbox-overlay" id="summaryOverlay">
+      <div class="summary-panel">
+        <div class="summary-header">
+          <span class="summary-close" onclick="closeMonthlySummary()">✕</span>
+          <div class="summary-title">📊 3月打卡总结</div>
+          <div class="summary-subtitle">温暖的每一天,都值得记录</div>
+        </div>
+        <div class="summary-stats">
+          <div class="summary-stat">
+            <div class="s-num">26</div>
+            <div class="s-label">打卡天数</div>
+          </div>
+          <div class="summary-stat">
+            <div class="s-num">12</div>
+            <div class="s-label">连续打卡</div>
+          </div>
+          <div class="summary-stat">
+            <div class="s-num">18</div>
+            <div class="s-label">收集花朵</div>
+          </div>
+          <div class="summary-stat">
+            <div class="s-num">15</div>
+            <div class="s-label">收藏夸奖</div>
+          </div>
+        </div>
+        <div class="summary-mood">
+          <div class="summary-mood-title">心情分布</div>
+          <div class="summary-mood-chart">
+            <div class="s-mood-bar">
+              <div class="s-bar-label">🌸 开心</div>
+              <div class="s-bar-track"><div class="s-bar-fill" style="width:45%;background:#FFB7C5;"></div></div>
+              <div class="s-bar-val">45%</div>
+            </div>
+            <div class="s-mood-bar">
+              <div class="s-bar-label">🍃 平静</div>
+              <div class="s-bar-track"><div class="s-bar-fill" style="width:30%;background:#A8C5A0;"></div></div>
+              <div class="s-bar-val">30%</div>
+            </div>
+            <div class="s-mood-bar">
+              <div class="s-bar-label">🌙 疲惫</div>
+              <div class="s-bar-track"><div class="s-bar-fill" style="width:15%;background:#B5A8D4;"></div></div>
+              <div class="s-bar-val">15%</div>
+            </div>
+            <div class="s-mood-bar">
+              <div class="s-bar-label">🌊 焦虑</div>
+              <div class="s-bar-track"><div class="s-bar-fill" style="width:6%;background:#8EC8D8;"></div></div>
+              <div class="s-bar-val">6%</div>
+            </div>
+            <div class="s-mood-bar">
+              <div class="s-bar-label">🌧 难过</div>
+              <div class="s-bar-track"><div class="s-bar-fill" style="width:4%;background:#9EB5C8;"></div></div>
+              <div class="s-bar-val">4%</div>
+            </div>
+          </div>
+        </div>
+        <div class="summary-quote">
+          <div class="summary-quote-text">"这个三月，你用26天的坚持记录下自己的心情，这本身就是一种了不起的成就。无论开心还是难过，每一种情绪都值得被看见。你比想象中更强大，每一天都在悄悄成长。继续加油，温暖的未来在前方等你。"</div>
+        </div>
+        <button class="summary-share-btn" onclick="shareMonthlySummary()">📤 分享到朋友圈</button>
+      </div>
+    </div>`;
+    document.body.insertAdjacentHTML('beforeend', html);
+  }
+  document.getElementById('summaryOverlay').classList.add('show');
+}
+
+function closeMonthlySummary() {
+  const overlay = document.getElementById('summaryOverlay');
+  if (overlay) overlay.classList.remove('show');
+}
+
+function shareMonthlySummary() {
+  showToast('📷 已生成打卡总结海报\n长按保存,分享到朋友圈');
+  closeMonthlySummary();
+}
+
 // ===== 初始化 =====
+initRandomPraise();
 renderBoxList('all');
 generateCalendar();
 </script>
