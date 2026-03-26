@@ -89,6 +89,71 @@ html, body {
   100% { opacity: 0; transform: translateY(-30px) rotate(-20deg) translateX(10px); }
 }
 
+/* ===== 加载页面 ===== */
+.loading-page {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, #F5F2E9 0%, #E8E4D8 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.loading-page.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loading-content {
+  text-align: center;
+  animation: fadeInUp 1s ease-out;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.loading-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.loading-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #C45C3E;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  margin-bottom: 12px;
+  letter-spacing: 4px;
+}
+.loading-subtitle {
+  font-size: 16px;
+  color: #7A7A7A;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 2px;
+}
+.loading-decoration {
+  margin-top: 30px;
+  font-size: 20px;
+  opacity: 0.6;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
 .music-panel {
   position: fixed;
   top: 100px;
@@ -457,6 +522,16 @@ html, body {
 </style>
 </head>
 <body>
+<!-- 加载页面 -->
+<div class="loading-page" id="loadingPage">
+  <div class="loading-content">
+    <div class="loading-icon">🌸</div>
+    <div class="loading-title">见字如面</div>
+    <div class="loading-subtitle">讨你喜欢</div>
+    <div class="loading-decoration">✦ ✦ ✦</div>
+  </div>
+</div>
+
 <div id="app">
 
   <!-- 音乐播放器 -->
@@ -865,6 +940,19 @@ html, body {
 </div><!-- end app -->
 
 <script>
+// ===== 隐藏加载页面 =====
+window.addEventListener('load', function() {
+  setTimeout(() => {
+    const loadingPage = document.getElementById('loadingPage');
+    if (loadingPage) {
+      loadingPage.classList.add('hidden');
+      setTimeout(() => {
+        loadingPage.style.display = 'none';
+      }, 800);
+    }
+  }, 1200); // 显示 1.2 秒后隐藏
+});
+
 // ===== Tab切换 =====
 const pages = ['home','box','checkin','calendar','profile','garden','mail','breath'];
 const coreTabCount = 5;
